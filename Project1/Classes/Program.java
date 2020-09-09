@@ -11,6 +11,7 @@ public class Program {
         pencil = new Stift();
         draw=new Drawing(screen,pencil);
 
+
         draw.polygon(100,200,100,3);
         draw.polygon(250,200,100,4);
         draw.polygon(400,200,70,5);
