@@ -1,4 +1,5 @@
 # Drawing shapes
 
-PURPOSE OF PROJECT: School homework
-DATE: 9.9.2020
+This is a school project drawing basic shapes.
+
+9.9.2020
