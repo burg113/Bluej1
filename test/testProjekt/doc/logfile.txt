@@ -1,0 +1,50 @@
+Class documentation
+<---- javadoc command: ---->
+C:\Program Files\Java\jdk1.8.0_221\bin\javadoc.exe
+-author
+-version
+-nodeprecated
+-package
+-noindex
+-notree
+-nohelp
+-nonavbar
+-source
+1.8
+-classpath
+D:\Schule\Informatik\BlueJ\bluej\lib\bluejcore.jar;D:\Schule\Informatik\BlueJ\bluej\lib\junit-4.11.jar;D:\Schule\Informatik\BlueJ\bluej\lib\hamcrest-core-1.3.jar;D:\Schule\Informatik\BlueJ\bluej\lib\lang-stride.jar;D:\Schule\Informatik\BlueJ\bluej\lib\userlib\mysql-connector-java-5.1.15-bin.jar;D:\Schule\Informatik\BlueJ\bluej\lib\userlib\pi4j-core.jar;D:\Schule\Informatik\BlueJ\bluej\lib\userlib\pi4j-device.jar;D:\Schule\Informatik\BlueJ\bluej\lib\userlib\pi4j-gpio-extension.jar;D:\Schule\Informatik\BlueJ\bluej\lib\userlib\pi4j-service.jar;D:\Schule\Informatik\BlueJ\bluej\lib\userlib\QTJava.zip;D:\Schule\Informatik\BlueJ\bluej\lib\userlib\SuMEreignis.jar;D:\Schule\Informatik\BlueJ\bluej\lib\userlib\SuMKern.jar;D:\Schule\Informatik\BlueJ\bluej\lib\userlib\SuMKomponenten.jar;D:\Schule\Informatik\BlueJ\bluej\lib\userlib\SuMMultimedia.jar;D:\Schule\Informatik\BlueJ\bluej\lib\userlib\SuMNetz.jar;D:\Schule\Informatik\BlueJ\bluej\lib\userlib\SuMSQL.jar;D:\Schule\Informatik\BlueJ\bluej\lib\userlib\SuMStrukturen.jar;D:\Schule\Informatik\BlueJ\bluej\lib\userlib\SuMWerkzeuge.jar;D:\Schule\Informatik\BlueJ\bluej\lib\userlib\xpp3_min-1.1.3.4.I.jar;D:\Schule\Informatik\BlueJ\bluej\lib\userlib\xstream-1.1.2.jar;D:\Schule\Informatik\projects\test\testProjekt
+-d
+D:\Schule\Informatik\projects\test\testProjekt\doc
+-encoding
+UTF-8
+-charset
+UTF-8
+D:\Schule\Informatik\projects\test\testProjekt\Programm.java
+<---- end of javadoc command ---->
+Loading source file D:\Schule\Informatik\projects\test\testProjekt\Programm.java...
+Constructing Javadoc information...
+D:\Schule\Informatik\projects\test\testProjekt\Programm.java:3: error: package sum.kerne does not exist
+import sum.kerne.*;
+^
+D:\Schule\Informatik\projects\test\testProjekt\Programm.java:6: error: cannot find symbol
+    Bildschirm screen;
+    ^
+  symbol:   class Bildschirm
+  location: class Programm
+D:\Schule\Informatik\projects\test\testProjekt\Programm.java:7: error: cannot find symbol
+    Stift pencil;
+    ^
+  symbol:   class Stift
+  location: class Programm
+Standard Doclet version 1.8.0_221
+Building tree for all the packages and classes...
+Generating D:\Schule\Informatik\projects\test\testProjekt\doc\Programm.html...
+Generating D:\Schule\Informatik\projects\test\testProjekt\doc\package-frame.html...
+Generating D:\Schule\Informatik\projects\test\testProjekt\doc\package-summary.html...
+Generating D:\Schule\Informatik\projects\test\testProjekt\doc\constant-values.html...
+Building index for all the packages and classes...
+Building index for all classes...
+Generating D:\Schule\Informatik\projects\test\testProjekt\doc\allclasses-frame.html...
+Generating D:\Schule\Informatik\projects\test\testProjekt\doc\allclasses-noframe.html...
+Generating D:\Schule\Informatik\projects\test\testProjekt\doc\index.html...
+3 warnings
