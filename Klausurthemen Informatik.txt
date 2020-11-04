@@ -1,0 +1,7 @@
+Begriffe - definitionen nennen
+
+Quellcode - Fehler korrigieren
+
+Struktogramm - Schreibtischtest durchführen 
+
+Quelltext oder Beschreibung - Struktogramm erstellen 
