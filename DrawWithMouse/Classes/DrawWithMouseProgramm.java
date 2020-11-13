@@ -4,7 +4,7 @@ import sum.kern.*;
 
 import java.util.Vector;
 
-public class Program2 {
+public class DrawWithMouseProgramm {
 
     int mode=2;
 
@@ -22,7 +22,7 @@ public class Program2 {
 
     int pencilSize=1;
 
-    public Program2(int xSize, int ySize) {
+    public DrawWithMouseProgramm(int xSize, int ySize) {
 
         screen = new Bildschirm(xSize, ySize);
         pencil = new Stift();
