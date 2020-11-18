@@ -14,7 +14,7 @@ public class DartProgram {
     Stift pencil;
 
     //variables that will not be changed while the program is running
-    static final float maxFrameRate=140;
+    static final float maxFrameRate=144;
 
 
     public DartProgram(int xSize, int ySize) {
