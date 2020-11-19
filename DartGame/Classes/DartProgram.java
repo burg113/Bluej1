@@ -48,9 +48,9 @@ public class DartProgram {
         //game loop
         while(!mouse.doppelKlick()) {
             // enforces the frame rate limit
-            while(System.nanoTime()<time+1000000000/maxFrameRate);
-            double frameTime=(System.nanoTime()-time)/1000000000;
-            System.out.println("Fps: "+ Math.round(1/frameTime)+"        the last frame took:"+frameTime );
+            while (System.nanoTime() < time + 1000000000 / maxFrameRate) ;
+            double frameTime = (System.nanoTime() - time) / 1000000000;
+//            System.out.println("Fps: " + Math.round(1 / frameTime) + "        the last frame took:" + frameTime);
             time = System.nanoTime();
 
             // draws the dart Board
@@ -59,26 +59,46 @@ public class DartProgram {
             //System.out.println(state);
 
             // in the following the different program states are advanced
-            if(state == 0 && mouse.istGedrueckt()) {                // this happens when the mouse is pressed. the 1st state (dart dropping down) is ended and the program advances into the 2nd (dart rotating)
-                state +=1 ;                                         // advances the state variable
+            if (state == 0 && mouse.istGedrueckt()) {                // this happens when the mouse is pressed. the 1st state (dart dropping down) is ended and the program advances into the 2nd (dart rotating)
+                state += 1;                                         // advances the state variable
                 dart.setNoGravity(true);                            // the dart should not be affected by gravity when rotating as it should not move
-                dart.setVelocity(0,0,140);                          // the x and y velocity are set to 0 so that the dart wont move. the rotational Velocity however is set so that the dart rotates
+                dart.setVelocity(0, 0, 140);                          // the x and y velocity are set to 0 so that the dart wont move. the rotational Velocity however is set so that the dart rotates
 
-            }else if(state == 1&&!mouse.istGedrueckt()){            // this happens when the mouse is released. the 2st state (dart rotating) is ended and the program advances into the 3nd (dart flying)
-                state +=1 ;                                         // advances the state variable
-                dart.setVelocity(0,0,0);                            // the darts velocity is at first set to 0 so that it does not keep on rotating
-                dart.shoot(1500);                                   // the dart is shot [moves with the passed in speed in the direction it is currently pointing]
+            } else if (state == 1 && !mouse.istGedrueckt()) {            // this happens when the mouse is released. the 2st state (dart rotating) is ended and the program advances into the 3nd (dart flying)
+                state += 1;                                         // advances the state variable
+                dart.setVelocity(0, 0, 0);                            // the darts velocity is at first set to 0 so that it does not keep on rotating
+                dart.shoot(1000);                                   // the dart is shot [moves with the passed in speed in the direction it is currently pointing]
                 dart.setNoGravity(false);                           // the dart should be affected by gravity while flying
                 dart.setFlying(true);                               // this tells the dart that it is able to rotate freely (into the direction it is flying). This makes the dart rotate while its flight path is curving
 
-            }else if(state == 2 && dart.hit(dartBoard)){            // this happens when the dart hits the ceiling, the floor, either of the walls or the target. the 3nd state (dart flying) is ended and the program advances into the 4nd (dart resting)
-                state +=1 ;                                         // advances the state variable
-                dart.setVelocity(0,0,0);                            // the darts velocity is set to 0 as it is not supposed to move
+            } else if (state == 2 && dart.hit(dartBoard) != -1) {            // this happens when the dart hits the ceiling, the floor, either of the walls or the target. the 3nd state (dart flying) is ended and the program advances into the 4nd (dart resting)
+                state += 1;                                         // advances the state variable
+                dart.setVelocity(0, 0, 0);                            // the darts velocity is set to 0 as it is not supposed to move
                 dart.setNoGravity(true);                            // the dart should for the same reason also not be affected by gravity
                 dart.setFlying(false);                              // the dart is also told that it is no longer flying so that it retains its current rotation
 
+                if (dart.hit(dartBoard) == 1) {
+                    cPencil.bewegeBis(screen.breite() / 20, screen.hoehe() / 10 * 8);
+                    cPencil.setzeSchriftGroesse(screen.breite() / 5);
+                    cPencil.setzeFarbe(Farbe.rgb(0, 180, 0));
+                    cPencil.schreibeText("getroffen");
+                } else {
+                    cPencil.bewegeBis(screen.breite() / 10, screen.hoehe() / 10 * 8);
+                    cPencil.setzeSchriftGroesse(screen.breite() / 6);
+                    cPencil.setzeFarbe(Farbe.rgb(180, 0, 0));
+                    cPencil.schreibeText("daneben");
+                }
+
             }
 
+            if (keyboard.wurdeGedrueckt()){
+                if(keyboard.zeichen()=='l') {
+                    dart.redirectPath(-5);
+                }else if(keyboard.zeichen()=='r'){
+                    dart.redirectPath(5);
+                }
+                keyboard.weiter();
+            }
             // the darts movement function is called independently of the programs state. however in some states its velocity is 0 which makes it not move
             dart.move(frameTime);
 
@@ -107,6 +127,16 @@ public class DartProgram {
             this.x=x;
             this.y=y;
             this.size=size;
+        }
+
+        // returns whether a dart has hit the dart board
+        // return 1 - yes
+        // return 0 - no
+        int hit(float height){
+            if(height>y-size&&height<y+size){
+                return 1;
+            }
+            return 0;
         }
 
         // this function draws the dart board and the wall above and below it
@@ -158,7 +188,7 @@ public class DartProgram {
         private float rotation;             // this is the angle the dart is currently rotated at
         private boolean visible;            // this variable dictates whether the dart is drawn on screen
 
-        final float gravity = 500;          // this is the gravity pulling the dart down. It is describes the amount the darts velocity is increased in one second
+        final float gravity = 400;          // this is the gravity pulling the dart down. It is describes the amount the darts velocity is increased in one second
         private boolean noGravity;          // this toggles the gravity on or of
 
         private boolean flying;             // this keeps the information on whether the dart is currently flying through the air
@@ -231,15 +261,27 @@ public class DartProgram {
         }
 
         // this function (with the help of the following two) determines whether the dart hit the ceiling, floor or either of the walls
-        boolean hit(DartBoard dartBoard) {
-            return furthestPoint() > dartBoard.x || furthestPoint() < 0 || highestPoint() > 1080 || highestPoint() < 0;
+        int hit(DartBoard dartBoard) {
+            System.out.println(dartFrontY());
+            if(dartFrontX() > dartBoard.x || dartFrontX() < 0 || dartFrontY() > 1080 || dartFrontY() < 0){
+                if(dartFrontX()>dartBoard.x){
+                    return dartBoard.hit(dartFrontY());
+                }else{
+                    return 0;
+                }
+
+            }
+            return -1;
         }
-        public float furthestPoint() {
+
+        public float dartFrontX() {
             return x + (float) Math.cos(rotation / 180 * Math.PI) * length / 2;
         }
-        private float highestPoint(){
+
+        private float dartFrontY(){
             return y-(float)Math.sin(rotation/180*Math.PI)*length/2;
         }
+
 
         // this function is a setter for the x as well as y velocity of the dart
         public void setVelocity(float xVel,float yVel){
@@ -262,6 +304,19 @@ public class DartProgram {
         // this is a setter for the 'noGravity' variable
         public void setNoGravity(boolean noGravity){
             this.noGravity=noGravity;
+        }
+
+        public void redirectPath(float angle){
+            float currentRotation = (float)(Math.atan(-yVel/xVel)*180/Math.PI);  // this rotates the dart according to its flight direction in program state 2
+            if(xVel<0){
+                currentRotation = currentRotation-180;                            // this has to be done as the atan will only give out the angle between 0 and 180 instead of between 0 and 360
+            }
+            currentRotation+=angle;
+            double speed = Math.sqrt(Math.pow(yVel,2)+Math.pow(xVel,2));
+            System.out.println(currentRotation);
+            xVel = (float) (Math.cos(currentRotation/180*Math.PI)*speed);
+            yVel = -(float) (Math.sin(currentRotation/180*Math.PI)*speed);
+
         }
 
         //this function draws the dart
