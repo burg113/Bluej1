@@ -7,6 +7,8 @@
       <sourceFolder url="file://$MODULE_DIR$/Project1" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/DrawWithMouse" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/DartGame" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ClassesErklähre" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/FigurstiftProjekt" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
