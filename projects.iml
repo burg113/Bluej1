@@ -9,11 +9,21 @@
       <sourceFolder url="file://$MODULE_DIR$/DartGame" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ClassesErklähre" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/FigurstiftProjekt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Billiard" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Bluej" level="application" />
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="userlib" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/annotations/19.0.0/annotations-19.0.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
