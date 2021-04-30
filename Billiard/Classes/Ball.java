@@ -1,6 +1,6 @@
 package Classes;
 
-import org.jetbrains.annotations.NotNull;
+import com.sun.istack.internal.NotNull;
 import sum.kern.Stift;
 
 public class Ball {
@@ -12,23 +12,6 @@ public class Ball {
 
     private Stift pencil;
 
-    public Ball(double size,double [] pos,GameInformation gameInformation){
-        this.size = size;
-        this.pos = pos;
-        this.vel = new double[]{0,0};
-        this.gameInformation = gameInformation;
-        pencil = new Stift();
-    }
-
-    public Ball(double size,double posX,double posY,GameInformation gameInformation){
-        this.size=size;
-        this.pos=new double[]{posX,posY};
-        this.vel=new double[]{0,0};
-        this.gameInformation=gameInformation;
-        pencil = new Stift();
-
-    }
-
     public Ball(double size,double [] pos,double [] vel,GameInformation gameInformation){
         this.size=size;
         this.pos=pos;
@@ -38,13 +21,16 @@ public class Ball {
 
     }
 
-    public Ball(double [] pos, @NotNull GameInformation gameInformation){
-        this.size=gameInformation.getBallSize();
-        this.pos=pos;
-        this.vel=new double[]{0,0};
-        this.gameInformation=gameInformation;
-        pencil = new Stift();
+    public Ball(double size,double [] pos,GameInformation gameInformation){
+        this(size,pos,new double[]{0,0},gameInformation);
+    }
 
+    public Ball(double size,double posX,double posY,GameInformation gameInformation){
+        this(size,new double[]{posX,posY},new double[]{0,0},gameInformation);
+    }
+
+    public Ball(double [] pos, @NotNull GameInformation gameInformation){
+        this(gameInformation.getBallSize(),pos,new double[]{0,0},gameInformation);
     }
 
 
@@ -68,7 +54,12 @@ public class Ball {
     }
 
     private  void handleWallCollisions(){
-
+        double[][] tableBounds=gameInformation.getBilliardTable().getBounds();
+        for(int i=0;i<2;i++) {
+            if (pos[i] < tableBounds[i][0]+size/2 || pos[i] > tableBounds[i][1]-size/2) {
+                vel[i] *= -1;
+            }
+        }
     }
 
     private void draw(){
