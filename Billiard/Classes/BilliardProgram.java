@@ -1,26 +1,33 @@
 package Classes;
 
+import Classes.Balls.ColorBalls;
+import Classes.Balls.FrictionBalls;
+import Classes.Balls.PulsatingBall;
 import Classes.Figurstift;
 import sum.kern.*;
 
+import java.awt.*;
+
 /*
 
-    after 6.14
+    from 6.17
+
+     Zahlkugel und Spurkugel
 
     hitboxes
 
 
  */
 /**
- *  <br>    This is a Billiard program.
+ *          The BilliardProgram class is a Billiard simulation.
  *  <br>
  *  <br>    When instantiating this class the program is automatically started.
- *  <br>
+ *  <br><br>
  *
  * @version 1.0
  * @author Lennart B
  */
-public class BilliardProgramm {
+public class BilliardProgram {
 
     //all the needed Objects are declared
     Figurstift pencil;
@@ -31,17 +38,19 @@ public class BilliardProgramm {
     //variables that will not be changed while the program is running
     static final float maxFrameRate=144;
 
-    private int screenWidth;
-    private int screenHeight;
+    private final int screenWidth;
+    private final int screenHeight;
 
     /**
-     *  <br>    When called the Billiard simulation will automatically start.
+     *  <br>    Start the Billiard simulation.
+     *  <br><br>
      *
      * @param screenWidth   The width of the program window
      * @param screenHeight  The height of the program window
      */
 
-    public BilliardProgramm(int screenWidth, int screenHeight) {
+    public BilliardProgram(int screenWidth, int screenHeight) {
+        //variables are assigned
         this.screenWidth=screenWidth;
         this.screenHeight=screenHeight;
         screen = new Bildschirm(screenWidth,screenHeight);
@@ -55,9 +64,10 @@ public class BilliardProgramm {
     }
 
     /**
-     *  <br>    This function runs the Billiard Game.
+     *  <br>    Runs the Billiard Game.
      *  <br>
-     *  <br>    This is automatically Started when this Class is instantiated.
+     *  <br>    It is automatically started when this class is instantiated.
+     *  <br><br>
      */
 
     // Game Loop
@@ -71,11 +81,15 @@ public class BilliardProgramm {
         //creates test balls
         for (int i=0;i<6;i++){
             for (int i2=0;i2<3;i2++) {
-                Ball ball = new Ball(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation);
-                ball.setVel(200 * (Math.random() - 0.5), 200 * (Math.random() - 0.5));
+                /*Ball ball = new FrictionBalls(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation);
+                Ball ball = new ColorBalls(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation,
+                        new Color((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255)));*/
+                Ball ball = new PulsatingBall(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation);
+                ball.setVel(500 * (Math.random() - 0.5), 500 * (Math.random() - 0.5));
                 gameInformation.addBall(ball);
             }
         }
+
 
         while(true) {
             double time = System.nanoTime();
@@ -85,12 +99,13 @@ public class BilliardProgramm {
             //computes the time the last frame took
             double frameTime = (System.nanoTime() - time) / 1000000000;
             //System.out.println("Fps: " + Math.round(1 / frameTime) + "        the last frame took:" + frameTime);
-            time = System.nanoTime();
 
-            //clear screen to earase last frame
+            //clear screen to erase last frame
             screen.loescheAlles();
 
+            //draw the billiard table
             billiardTable.draw();
+
             //update all balls
             for (Ball ball : gameInformation.getBalls()) {
                 ball.update(frameTime);
@@ -102,14 +117,14 @@ public class BilliardProgramm {
     }
 
     /**
-     *  <br>    This function does the cleanup. It should only be run when the program finished executing!
+     *  <br>    Does the cleanup. It should only be run when the program finished executing!
      *  <br>
-     *  <br>    This is automatically run when the program finises. (Which it currently does not do!)
+     *  <br>    This is automatically run when the program finishes. (Which it currently does not do!)
+     *  <br><br>
      */
     public void cleanup(){
         screen.gibFrei();
         pencil.gibFrei();
-
     }
 
 
