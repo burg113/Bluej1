@@ -6,36 +6,34 @@ import com.sun.istack.internal.NotNull;
 
 public class PulsatingBall extends Ball {
 
-    double minSize;
-    double maxSize;
-    double growingSpeed;
+    private double minSize;
+    private double maxSize;
+    private double growingSpeed;
 
     public PulsatingBall(double size, double[] pos, double[] vel, GameInformation gameInformation) {
         super(size, pos, vel, gameInformation);
-        minSize=0.5*size;
-        maxSize=1.5*size;
-        growingSpeed=size*2;
+        assignVariables(size);
     }
 
     public PulsatingBall(double size, double[] pos, GameInformation gameInformation) {
         super(size, pos, gameInformation);
-        minSize=0.5*size;
-        maxSize=1.5*size;
-        growingSpeed=size*2;
+        assignVariables(size);
     }
 
     public PulsatingBall(double size, double posX, double posY, GameInformation gameInformation) {
         super(size, posX, posY, gameInformation);
-        minSize=0.5*size;
-        maxSize=1.5*size;
-        growingSpeed=size*2;
+        assignVariables(size);
     }
 
     public PulsatingBall(double[] pos,@NotNull GameInformation gameInformation) {
         super(pos, gameInformation);
-        minSize=0.5*gameInformation.getBallSize();
-        maxSize=1.5*gameInformation.getBallSize();
-        growingSpeed=gameInformation.getBallSize()*2;
+        assignVariables(gameInformation.getBallSize());
+    }
+
+    private void assignVariables(double size){
+        minSize=0.5*size;
+        maxSize=1.5*size;
+        growingSpeed=size*2;
     }
 
 

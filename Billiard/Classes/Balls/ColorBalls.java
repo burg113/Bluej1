@@ -4,6 +4,7 @@ import Classes.Ball;
 import Classes.GameInformation;
 import sum.kern.Buntstift;
 import sum.kern.Muster;
+import sum.kern.Stift;
 
 import java.awt.*;
 
@@ -20,23 +21,27 @@ public class ColorBalls extends Ball{
 
     public ColorBalls(double size, double[] pos, GameInformation gameInformation) {
         super(size, pos, gameInformation);
-        pencil=new Buntstift();
+        initializeVariables();
     }
 
     public ColorBalls(double size, double posX, double posY, GameInformation gameInformation) {
         super(size, posX, posY, gameInformation);
-        pencil=new Buntstift();
+        initializeVariables();
     }
 
     public ColorBalls(double size, double posX, double posY, GameInformation gameInformation, Color color) {
         super(size, posX, posY, gameInformation);
         this.color=color;
-        pencil=new Buntstift();
+        initializeVariables();
     }
 
     public ColorBalls(double[] pos, GameInformation gameInformation) {
         super(pos, gameInformation);
-        pencil=new Buntstift();
+        initializeVariables();
+    }
+
+    private void initializeVariables(){
+        pencil = new Buntstift();
     }
 
     @Override

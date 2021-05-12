@@ -1,8 +1,6 @@
 package Classes;
 
-import Classes.Balls.ColorBalls;
-import Classes.Balls.FrictionBalls;
-import Classes.Balls.PulsatingBall;
+import Classes.Balls.*;
 import Classes.Figurstift;
 import sum.kern.*;
 
@@ -83,8 +81,11 @@ public class BilliardProgram {
             for (int i2=0;i2<3;i2++) {
                 /*Ball ball = new FrictionBalls(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation);
                 Ball ball = new ColorBalls(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation,
-                        new Color((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255)));*/
+                        new Color((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255)));
                 Ball ball = new PulsatingBall(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation);
+                Ball ball = new NumberedBall(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation, 1+i*6+i2);*/
+                Ball ball = new TraceBall(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation);
+
                 ball.setVel(500 * (Math.random() - 0.5), 500 * (Math.random() - 0.5));
                 gameInformation.addBall(ball);
             }
