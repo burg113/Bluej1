@@ -115,10 +115,9 @@ public class Ball {
     }
 
     //handles collisions
-    private void handleCollisions(){
+    public void handleCollisions(){
         //handle collisions with the walls
         handleWallCollisions();
-
     }
 
     //handles collisions with the wall
@@ -131,22 +130,27 @@ public class Ball {
             //checks if there was a collision
             if (pos[i] > tableBounds[i][1]-size/2) {
                 //changes velocity
-                vel[i] = -Math.abs(vel[i]);
+                vel[i] = -Math.abs(vel[i]) * (1 - gameInformation.getCollisionEnergyLoss());
+                vel[(i + 1) % 2] = vel[(i + 1) % 2] * (1 - gameInformation.getCollisionEnergyLoss());
+
 
                 //the ball is moved outside of the wall
                 //this is done to ensure that a ball neither by slowing down nor by changing size can get stuck in the wall
-                pos[i] = tableBounds[i][1]-size/2;
+                pos[i] = tableBounds[i][1] - size/2;
             }
 
-            if (pos[i] < tableBounds[i][0]+size/2 ) {
+            if (pos[i] < tableBounds[i][0] + size/2 ) {
                 //changes velocity
-                vel[i] = Math.abs(vel[i]);
+                vel[i] = Math.abs(vel[i]) * (1 - gameInformation.getCollisionEnergyLoss());
+                vel[(i + 1) % 2] = vel[(i + 1) % 2] * (1 - gameInformation.getCollisionEnergyLoss());
 
                 //the ball is moved outside of the wall
                 //this is done to ensure that a ball neither by slowing down nor by changing size can get stuck in the wal
-                pos[i] = tableBounds[i][0]+size/2;
+                pos[i] = tableBounds[i][0] + size/2;
             }
         }
+
+
     }
 
     /**
@@ -171,6 +175,7 @@ public class Ball {
     public void cleanup(){
         pencil.gibFrei();
     }
+
 
     /**
      *  <br>    Gets the balls velocity
@@ -272,5 +277,25 @@ public class Ball {
      */
     public void setSize(double size) {
         this.size = size;
+    }
+
+    /**
+     *  <br>    Gets the gameInformation of the game this ball is a part of
+     *  <br><br>
+     *
+     * @return  The gameInformation
+     */
+    public GameInformation getGameInformation() {
+        return gameInformation;
+    }
+
+    /**
+     *  <br>    Sets the gameInformation of the game this ball is a part of
+     *  <br><br>
+     *
+     * @param gameInformation The gameInformation
+     */
+    public void setGameInformation(GameInformation gameInformation) {
+        this.gameInformation = gameInformation;
     }
 }

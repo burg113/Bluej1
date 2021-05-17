@@ -75,7 +75,7 @@ public class BilliardProgram {
         BilliardTable billiardTable=new BilliardTable(150,100,1000,500);
 
         gameInformation=new GameInformation(billiardTable);
-
+        gameInformation.setCollisionEnergyLoss(0.1);
         //creates test balls
         for (int i=0;i<6;i++){
             for (int i2=0;i2<3;i2++) {
@@ -84,9 +84,11 @@ public class BilliardProgram {
                         new Color((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255)));
                 Ball ball = new PulsatingBall(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation);
                 Ball ball = new NumberedBall(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation, 1+i*6+i2);
-                Ball ball = new TraceBall(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation);*/
-                Ball ball = new GravityBall(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation);
-
+                Ball ball = new TraceBall(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation);
+                Ball ball = new GravityBall(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation);*/
+                double size = 20 + 40 * Math.random();
+                Ball ball = new CollisionBall(size, 250 + i * 100, 200+i2*100, gameInformation);
+                ball.setMass(size);
                 ball.setVel(500 * (Math.random() - 0.5), 500 * (Math.random() - 0.5));
                 gameInformation.addBall(ball);
             }

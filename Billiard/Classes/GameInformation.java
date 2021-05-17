@@ -16,6 +16,7 @@ public class GameInformation {
 
     //needed variables are declared
     private int ballSize;
+    private double CollisionEnergyLoss;
 
     //needed objects are declared
     private List<Ball> balls;
@@ -31,6 +32,8 @@ public class GameInformation {
         //assigns variables
         this.billiardTable=billiardTable;
         balls=new ArrayList<Ball>();
+        ballSize = 20;
+        CollisionEnergyLoss = 0;
     }
 
     /**
@@ -103,5 +106,23 @@ public class GameInformation {
         return billiardTable;
     }
 
+    /**
+     *  <br>    Gets the energy loss in case of a collision with either the wall or another ball
+     *  <br><br>
+     *
+     * @return The energy loss in % <br> between 0 and 1
+     */
+    public double getCollisionEnergyLoss() {
+        return CollisionEnergyLoss;
+    }
 
+    /**
+     *  <br>    Sets the energy loss in case of a collision with either the wall or another ball
+     *  <br><br>
+     *
+     * @param collisionEnergyLoss The energy loss in % <br> between 0 and 1
+     */
+    public void setCollisionEnergyLoss(double collisionEnergyLoss) {
+        CollisionEnergyLoss = collisionEnergyLoss;
+    }
 }
