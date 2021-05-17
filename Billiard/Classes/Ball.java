@@ -64,7 +64,7 @@ public class Ball {
      * @param size The diameter of the ball
      * @param posX The X-position of the ball
      * @param posY The Y-position of the ball
-     * @param gameInformation the GameInformation class containing all information of the current game
+     * @param gameInformation The GameInformation class containing all information of the current game
      */
     public Ball(double size,double posX,double posY,GameInformation gameInformation){
         this(size,new double[]{posX,posY},new double[]{0,0},gameInformation);
@@ -84,7 +84,7 @@ public class Ball {
 
     /**
      *  <br>    Updates the balls position
-     *  <br>    This should be called every frame in order for the Ball to move;
+     *  <br>    This should be called every frame in order for the Ball to move
      *  <br><br>
      *
      * @param deltaTime The time that passed since the last update in seconds
@@ -100,7 +100,14 @@ public class Ball {
         draw();
     }
 
-    //moves the ball
+
+    /**
+     *  <br>    Moves the ball
+     *  <br>    This is automatically called by the update method
+     *  <br><br>
+     *
+     * @param deltaTime The time that passed since the last time this function has been called in seconds
+     */
     public void move(double deltaTime){
         //applies the velocity
         pos[0]+=vel[0]*deltaTime;
@@ -142,7 +149,12 @@ public class Ball {
         }
     }
 
-    //draws the ball
+    /**
+     *  <br>    Draws the ball onto the screen
+     *  <br>    This is automatically called by the update method
+     *  <br><br>
+     *
+     */
     public void draw(){
         // move to the balls position
         pencil.bewegeBis(pos[0],pos[1]);
