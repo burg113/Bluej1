@@ -194,6 +194,16 @@ public class Ball {
     }
 
     /**
+     *  <br>    Sets the balls velocity
+     *  <br><br>
+     *
+     * @param vel The balls velocity <br> {x,y}
+     */
+    public void setVel(double[] vel) {
+        this.vel =vel;
+    }
+
+    /**
      *  <br>    Gets the balls mass
      *  <br><br>
      *

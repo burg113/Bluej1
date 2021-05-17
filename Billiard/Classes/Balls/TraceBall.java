@@ -21,7 +21,7 @@ public class TraceBall extends Ball {
 
     List<double[]> trace;
 
-    private int tracePoints=100;
+    private int tracePoints;
 
 
     /**
@@ -84,6 +84,7 @@ public class TraceBall extends Ball {
     private void initializeVariables(){
         pencil = new Stift();
         trace =new ArrayList<>();
+        tracePoints=100;
     }
 
     //javadoc is kept from the overridden function
