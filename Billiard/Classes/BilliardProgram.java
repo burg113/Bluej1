@@ -79,8 +79,8 @@ public class BilliardProgram {
         //creates test balls
         for (int i=0;i<6;i++){
             for (int i2=0;i2<3;i2++) {
-                /*Ball ball = new FrictionBalls(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation);
-                Ball ball = new ColorBalls(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation,
+                /*Ball ball = new FrictionBall(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation);
+                Ball ball = new ColorBall(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation,
                         new Color((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255)));
                 Ball ball = new PulsatingBall(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation);
                 Ball ball = new NumberedBall(20 + 40 * Math.random(), 250 + i * 100, 200+i2*100, gameInformation, 1+i*6+i2);
@@ -117,6 +117,7 @@ public class BilliardProgram {
 
 
         }
+
 
     }
 

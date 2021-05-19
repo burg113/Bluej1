@@ -40,9 +40,12 @@ public class CollisionBall extends Ball {
 
         //loops through all of the Balls after the current (in order to avoid doubled collision Maths)
         for(Ball ball : allBalls.subList(allBalls.indexOf(this)+1,allBalls.size())){
+
+            //gets the position of both balls
             double[] p1=getPos();
             double[] p2=ball.getPos();
 
+            //gets the (square of) the distance between both balls
             double sqrDist= sqrDist(p1, p2);
 
             //checks if two balls are colliding
@@ -51,36 +54,48 @@ public class CollisionBall extends Ball {
                 /*  following calculations are done according to: https://gamedev.stackexchange.com/questions/7862/is-there-an-algorithm-for-a-pool-game/7901#7901
 
                     note:   in line 12 of the pseudocode (computing the impulseStrength) the last factor seems to be wrong:
-                    given:      float impulseStrength = (1 + coefficient) * dot * (1 / ball1.mass + 1 / ball2.mass)
-                    correct:    float impulseStrength = (1 + coefficient) * dot / (1 / ball1.mass + 1 / ball2.mass)
+                    given:              float impulseStrength = (1 + coefficient) * dot * (1 / ball1.mass + 1 / ball2.mass)
+                    correct (& used):   float impulseStrength = (1 + coefficient) * dot / (1 / ball1.mass + 1 / ball2.mass)
 
                 */
 
+                //gets the velocities of both balls
                 double[] v1 = getVel();
                 double[] v2 = ball.getVel();
+
+                //gets the mass of both balls
                 double m1 = getMass();
                 double m2 = ball.getMass();
 
-                //System.out.println("sqrDist: "+sqrDist);
-
+                //computes the difference
                 double[] velDelta = {v1[0]-v2[0],v1[1]-v2[1]};
-                double[] collisionNormal = collisionNormal(p2,p1,Math.sqrt(sqrDist));
-                //System.out.println("collisionNormal: "+collisionNormal[0]+"  "+collisionNormal[1]);
 
-                double dot=0;
+                //computes the collision normal (vector of length 1 perpendicular to collision surface)
+                double[] collisionNormal = collisionNormal(p2,p1,Math.sqrt(sqrDist));
+
+                //computes the dot product of the difference in velocities and collision normal
+                double dot = 0;
                 try {
                     dot = dotProduct(velDelta,collisionNormal);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                System.out.println("dot: "+dot);
 
+                // checks if the balls are moving towards eac other (if they are not no velocities will be changed as they are already moving away from each oter)
                 if(dot>0){
+                    //computes the strength of the impact
                     double impulseStrength = 2 * (1 - getGameInformation().getCollisionEnergyLoss()) * dot / (1/m1 + 1/m2);
+
+                    //computes the impulse vector (collision normal scaled by the impulseStrength)
                     double[] impulse = {impulseStrength * collisionNormal[0],impulseStrength * collisionNormal[1]};
-                    //System.out.println(impulse[0]+"  "+impulse[1]);
-                    setVel(new double[]{v1[0]-impulse[0]/m1,v1[1]-impulse[1]/m1});
-                    ball.setVel(new double[]{v2[0]+impulse[0]/m2,v2[1]+impulse[1]/m2});
+
+                    //computes the velocities after the collision
+                    double [] v1new=new double[]{v1[0]-impulse[0]/m1,v1[1]-impulse[1]/m1};
+                    double [] v2new=new double[]{v2[0]+impulse[0]/m2,v2[1]+impulse[1]/m2};
+
+                    //sets both velocities to the new computed velocities
+                    setVel(v1new);
+                    ball.setVel(v2new);
                 }
 
 

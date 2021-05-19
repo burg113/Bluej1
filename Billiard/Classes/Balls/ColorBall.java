@@ -9,13 +9,13 @@ import sum.kern.Stift;
 import java.awt.*;
 
 /**
- *          The ColorBalls class represents a colored billiard ball.
+ *          The ColorBall class represents a colored billiard ball.
  *  <br><br>
  *
  * @version 1.0
  * @author Lennart B
  */
-public class ColorBalls extends Ball{
+public class ColorBall extends Ball{
 
     private Buntstift pencil;
 
@@ -31,7 +31,7 @@ public class ColorBalls extends Ball{
      * @param vel The velocity of the ball <br> {x,y}
      * @param gameInformation The GameInformation class containing all information of the current game
      */
-    public ColorBalls(double size, double[] pos, double[] vel, GameInformation gameInformation) {
+    public ColorBall(double size, double[] pos, double[] vel, GameInformation gameInformation) {
         super(size, pos, vel, gameInformation);
         pencil=new Buntstift();
     }
@@ -45,7 +45,7 @@ public class ColorBalls extends Ball{
      * @param pos The position of the ball <br> {x,y}
      * @param gameInformation The GameInformation class containing all information of the current game
      */
-    public ColorBalls(double size, double[] pos, GameInformation gameInformation) {
+    public ColorBall(double size, double[] pos, GameInformation gameInformation) {
         super(size, pos, gameInformation);
         initializeVariables();
     }
@@ -60,7 +60,7 @@ public class ColorBalls extends Ball{
      * @param posY The Y-position of the ball
      * @param gameInformation The GameInformation class containing all information of the current game
      */
-    public ColorBalls(double size, double posX, double posY, GameInformation gameInformation) {
+    public ColorBall(double size, double posX, double posY, GameInformation gameInformation) {
         super(size, posX, posY, gameInformation);
         initializeVariables();
     }
@@ -76,7 +76,7 @@ public class ColorBalls extends Ball{
      * @param gameInformation The GameInformation class containing all information of the current game
      * @param color The color of the ball
      */
-    public ColorBalls(double size, double posX, double posY, GameInformation gameInformation, Color color) {
+    public ColorBall(double size, double posX, double posY, GameInformation gameInformation, Color color) {
         super(size, posX, posY, gameInformation);
         this.color=color;
         initializeVariables();
@@ -90,7 +90,7 @@ public class ColorBalls extends Ball{
      * @param pos The position of the ball <br> {x,y}
      * @param gameInformation The GameInformation class containing all information of the current game
      */
-    public ColorBalls(double[] pos, GameInformation gameInformation) {
+    public ColorBall(double[] pos, GameInformation gameInformation) {
         super(pos, gameInformation);
         initializeVariables();
     }

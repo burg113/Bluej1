@@ -1,6 +1,5 @@
 package Classes.Balls;
 
-import Classes.Ball;
 import Classes.GameInformation;
 
 
@@ -11,7 +10,7 @@ import Classes.GameInformation;
  * @version 1.0
  * @author Lennart B
  */
-public class GravityBall extends FrictionBalls {
+public class GravityBall extends FrictionBall {
 
     private double gravity;
 

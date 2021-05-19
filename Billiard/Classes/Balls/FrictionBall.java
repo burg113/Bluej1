@@ -10,7 +10,7 @@ import Classes.GameInformation;
  * @version 1.0
  * @author Lennart B
  */
-public class FrictionBalls extends Ball {
+public class FrictionBall extends Ball {
 
     /**
      *  <br>    Creates a new ball that slows down when rolling
@@ -22,7 +22,7 @@ public class FrictionBalls extends Ball {
      * @param vel The velocity of the ball <br> {x,y}
      * @param gameInformation The GameInformation class containing all information of the current game
      */
-    public FrictionBalls(double size, double[] pos, double[] vel, GameInformation gameInformation) {
+    public FrictionBall(double size, double[] pos, double[] vel, GameInformation gameInformation) {
         super(size, pos, vel, gameInformation);
     }
 
@@ -35,7 +35,7 @@ public class FrictionBalls extends Ball {
      * @param pos The position of the ball <br> {x,y}
      * @param gameInformation The GameInformation class containing all information of the current game
      */
-    public FrictionBalls(double size, double[] pos, GameInformation gameInformation) {
+    public FrictionBall(double size, double[] pos, GameInformation gameInformation) {
         super(size, pos, gameInformation);
     }
 
@@ -49,7 +49,7 @@ public class FrictionBalls extends Ball {
      * @param posY The Y-position of the ball
      * @param gameInformation The GameInformation class containing all information of the current game
      */
-    public FrictionBalls(double size, double posX, double posY, GameInformation gameInformation) {
+    public FrictionBall(double size, double posX, double posY, GameInformation gameInformation) {
         super(size, posX, posY, gameInformation);
     }
 
@@ -61,7 +61,7 @@ public class FrictionBalls extends Ball {
      * @param pos The position of the ball <br> {x,y}
      * @param gameInformation The GameInformation class containing all information of the current game
      */
-    public FrictionBalls(double[] pos, GameInformation gameInformation) {
+    public FrictionBall(double[] pos, GameInformation gameInformation) {
         super(pos, gameInformation);
     }
 
