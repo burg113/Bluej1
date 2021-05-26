@@ -5,25 +5,78 @@ import Classes.GameInformation;
 
 import java.util.List;
 
+
+/**
+ *          The CollisionBall class represents a billiard ball which collides with other balls.
+ *  <br>    It is recommended to either use only or no CollisionBalls. If a mix is needed the collision Balls would have
+ *          to be added to the GameInformation before the others are in order to ensure all collisions are computed.
+ *  <br><br>
+ *
+ * @version 1.0
+ * @author Lennart B
+ */
 public class CollisionBall extends Ball {
 
 
+    /**
+     *  <br>    Creates a new collision ball
+     *  <br><br>
+     *
+     *
+     * @param size The diameter of the ball
+     * @param pos The position of the ball <br> {x,y}
+     * @param vel The velocity of the ball <br> {x,y}
+     * @param gameInformation The GameInformation class containing all information of the current game
+     */
     public CollisionBall(double size, double[] pos, double[] vel, GameInformation gameInformation) {
         super(size, pos, vel, gameInformation);
     }
 
+    /**
+     *  <br>    Creates a new collision ball
+     *  <br><br>
+     *
+     *
+     * @param size The diameter of the ball
+     * @param pos The position of the ball <br> {x,y}
+     * @param gameInformation The GameInformation class containing all information of the current game
+     */
     public CollisionBall(double size, double[] pos, GameInformation gameInformation) {
         super(size, pos, gameInformation);
     }
 
+    /**
+     *  <br>    Creates a new collision ball
+     *  <br><br>
+     *
+     *
+     * @param size The diameter of the ball
+     * @param posX The X-position of the ball
+     * @param posY The Y-position of the ball
+     * @param gameInformation The GameInformation class containing all information of the current game
+     */
     public CollisionBall(double size, double posX, double posY, GameInformation gameInformation) {
         super(size, posX, posY, gameInformation);
     }
 
+    /**
+     *  <br>    Creates a new colored ball
+     *  <br><br>
+     *
+     *
+     * @param pos The position of the ball <br> {x,y}
+     * @param gameInformation The GameInformation class containing all information of the current game
+     */
     public CollisionBall(double[] pos, GameInformation gameInformation) {
         super(pos, gameInformation);
     }
 
+    /**
+     *  <br>    Handles collisions with the walls and other balls
+     *  <br>    This is automatically called by the update method
+     *  <br><br>
+     *
+     */
     //handles collisions
     public void handleCollisions(){
         //handle collisions with the walls
@@ -84,7 +137,7 @@ public class CollisionBall extends Ball {
                 // checks if the balls are moving towards eac other (if they are not no velocities will be changed as they are already moving away from each oter)
                 if(dot>0){
                     //computes the strength of the impact
-                    double impulseStrength = 2 * (1 - getGameInformation().getCollisionEnergyLoss()) * dot / (1/m1 + 1/m2);
+                    double impulseStrength = 2  * dot / (1/m1 + 1/m2);
 
                     //computes the impulse vector (collision normal scaled by the impulseStrength)
                     double[] impulse = {impulseStrength * collisionNormal[0],impulseStrength * collisionNormal[1]};
@@ -92,6 +145,13 @@ public class CollisionBall extends Ball {
                     //computes the velocities after the collision
                     double [] v1new=new double[]{v1[0]-impulse[0]/m1,v1[1]-impulse[1]/m1};
                     double [] v2new=new double[]{v2[0]+impulse[0]/m2,v2[1]+impulse[1]/m2};
+
+                    // accounts for the set collision energyLoss
+                    v1new[0]*=(1 - getGameInformation().getCollisionEnergyLoss());
+                    v1new[1]*=(1 - getGameInformation().getCollisionEnergyLoss());
+                    v2new[0]*=(1 - getGameInformation().getCollisionEnergyLoss());
+                    v2new[1]*=(1 - getGameInformation().getCollisionEnergyLoss());
+
 
                     //sets both velocities to the new computed velocities
                     setVel(v1new);

@@ -6,16 +6,6 @@ import sum.kern.*;
 
 import java.awt.*;
 
-/*
-
-    from 6.17
-
-     Zahlkugel und Spurkugel
-
-    hitboxes
-
-
- */
 /**
  *          The BilliardProgram class is a Billiard simulation.
  *  <br>
@@ -30,6 +20,7 @@ public class BilliardProgram {
     //all the needed Objects are declared
     Figurstift pencil;
     Bildschirm screen;
+    Maus mouse;
 
     GameInformation gameInformation;
 
@@ -55,6 +46,8 @@ public class BilliardProgram {
 
         pencil = new Figurstift();
 
+        mouse = new Maus();
+
         //starts the gameloop
         run();
 
@@ -70,7 +63,6 @@ public class BilliardProgram {
 
     // Game Loop
     public void run() {
-
 
         BilliardTable billiardTable=new BilliardTable(150,100,1000,500);
 
@@ -95,7 +87,7 @@ public class BilliardProgram {
         }
 
 
-        while(true) {
+        while(!mouse.doppelKlick()) {
             double time = System.nanoTime();
             // enforces the frame rate limit
             while (System.nanoTime() < time + 1000000000 / maxFrameRate) {}
@@ -115,21 +107,25 @@ public class BilliardProgram {
                 ball.update(frameTime);
             }
 
-
         }
 
+        cleanup();
+        for (Ball ball : gameInformation.getBalls()) {
+            ball.cleanup();
+        }
 
     }
 
     /**
      *  <br>    Does the cleanup. It should only be run when the program finished executing!
      *  <br>
-     *  <br>    This is automatically run when the program finishes. (Which it currently does not do!)
+     *  <br>    This is automatically run when the program finishes.
      *  <br><br>
      */
     public void cleanup(){
         screen.gibFrei();
         pencil.gibFrei();
+        mouse.gibFrei();
     }
 
 

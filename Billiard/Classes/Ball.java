@@ -114,6 +114,12 @@ public class Ball {
         pos[1]+=vel[1]*deltaTime;
     }
 
+    /**
+     *  <br>    Handles collisions with the walls
+     *  <br>    This is automatically called by the update method
+     *  <br><br>
+     *
+     */
     //handles collisions
     public void handleCollisions(){
         //handle collisions with the walls
@@ -145,7 +151,7 @@ public class Ball {
                 vel[(i + 1) % 2] = vel[(i + 1) % 2] * (1 - gameInformation.getCollisionEnergyLoss());
 
                 //the ball is moved outside of the wall
-                //this is done to ensure that a ball neither by slowing down nor by changing size can get stuck in the wal
+                //this is done to ensure that a ball neither by slowing down nor by changing size can get stuck in the wall
                 pos[i] = tableBounds[i][0] + size/2;
             }
         }

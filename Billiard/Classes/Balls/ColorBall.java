@@ -117,6 +117,14 @@ public class ColorBall extends Ball{
 
     }
 
+    //javadoc is kept from the overridden function
+    //does the cleanup
+    @Override
+    public void cleanup() {
+        pencil.gibFrei();
+        super.cleanup();
+    }
+
     /**
      *  <br>    Gets the color of the ball
      *  <br><br>

@@ -54,6 +54,7 @@ public class NumberedBall extends Ball {
      * @param posX The X-position of the ball
      * @param posY The Y-position of the ball
      * @param gameInformation The GameInformation class containing all information of the current game
+     * @param number The number of the ballb
      */
     public NumberedBall(double size, double posX, double posY, GameInformation gameInformation, int number) {
         super(size, posX, posY, gameInformation);
@@ -91,6 +92,15 @@ public class NumberedBall extends Ball {
         //write number
         pencil.schreibeZahl(number);
 
+    }
+
+
+    //javadoc is kept from the overridden function
+    //does the cleanup
+    @Override
+    public void cleanup() {
+        pencil.gibFrei();
+        super.cleanup();
     }
 
     /**
