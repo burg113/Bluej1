@@ -9,7 +9,7 @@ import sum.kern.Buntstift;
 public class Text extends Renderable {
 
     private String text;
-    private int writingSize;
+    private int writingSize = 20;
 
     public Text(){
         this("",0,0);
@@ -27,9 +27,16 @@ public class Text extends Renderable {
 
     @Override
     public void render() {
-        pencil.bewegeBis(posX,posY);
-        pencil.setzeSchriftGroesse(writingSize);
-        pencil.schreibeText(text);
+
+        if(sizeX == 0 && sizeY == 0) {  // writes the text at the given position (position = top left corner of text)
+            pencil.bewegeBis(posX, posY + writingSize);
+            pencil.setzeSchriftGroesse(writingSize);
+            pencil.schreibeText(text);
+        }else{//roughly centers the text in the middle of the given box dimensions
+            pencil.bewegeBis(posX + sizeX / 2 - writingSize * text.length() / 4.2, posY + sizeY / 2 + writingSize / 3);
+            pencil.setzeSchriftGroesse(writingSize);
+            pencil.schreibeText(text);
+        }
     }
 
     public void setSize(int size) {

@@ -2,12 +2,14 @@ package Classes;
 
 import sum.kern.Buntstift;
 
+import java.awt.*;
+
 public abstract class Renderable {
 
     public Buntstift pencil;
     public double posX, posY;
     public double sizeX, sizeY;
-
+    public Color color = Color.BLACK;
 
     public Renderable(){
         this(0,0);
@@ -80,6 +82,15 @@ public abstract class Renderable {
 
     public double getSizeY() {
         return sizeY;
+    }
+
+    public void setColor(Color color) {
+        pencil.setzeFarbe(color);
+        this.color=color;
+    }
+
+    public void setColor(int r, int g, int b) {
+        pencil.setzeFarbe(new Color(r,g,b));
     }
 
 
